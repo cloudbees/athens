@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   registry: docker.io
-  repository: gomods/athens
+  repository: fiunchinho/athens
   tag: v0.2.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -34,7 +34,7 @@ storage:
     storageRoot: "/var/lib/athens"
     persistence:
       ## Note if you use disk.persistence.enabled, replicaCount should be set to 1 unless your access mode is ReadWriteMany
-      enabled: false
+      enabled: true
       accessMode: ReadWriteOnce
       size: 4Gi
   mongo:
@@ -52,7 +52,7 @@ jaeger:
   image:
     repository: jaegertracing/all-in-one
     tag: latest
-  enabled: true
+  enabled: false
   # you must set this on the command line when you run 'helm install'
   # for example, you need to run 'helm install --set jaeger.url=myurl ...'
   url: "SET THIS ON THE COMMAND LINE"
