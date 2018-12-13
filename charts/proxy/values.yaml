@@ -1,8 +1,8 @@
 replicaCount: 1
 image:
   registry: docker.io
-  repository: cloudbees/athens
-  tag: v0.2.0
+  repository: 10.51.248.122:5000/cloudbees/athens
+  tag: 0.2.4
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
