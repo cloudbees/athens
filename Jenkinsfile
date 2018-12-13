@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    ORG = 'fiunchinho'
+    ORG = 'cloudbees'
     APP_NAME = 'athens'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
   }
@@ -16,7 +16,7 @@ pipeline {
         HELM_RELEASE = "$PREVIEW_NAMESPACE".toLowerCase()
       }
       steps {
-        dir('/home/jenkins/go/src/github.com/fiunchinho/athens') {
+        dir('/home/jenkins/go/src/github.com/cloudbees/athens') {
           checkout scm
           sh "make build"
           sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
@@ -29,8 +29,8 @@ pipeline {
         branch 'master'
       }
       steps {
-        dir('/home/jenkins/go/src/github.com/fiunchinho/athens') {
-          git 'https://github.com/fiunchinho/athens.git'
+        dir('/home/jenkins/go/src/github.com/cloudbees/athens') {
+          git 'https://github.com/cloudbees/athens.git'
 
           // so we can retrieve the version in later steps
           sh "echo \$(jx-release-version) > VERSION"
@@ -46,7 +46,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        dir('/home/jenkins/go/src/github.com/fiunchinho/athens/charts/proxy') {
+        dir('/home/jenkins/go/src/github.com/cloudbees/athens/charts/proxy') {
           sh "jx step changelog --version v\$(cat ../../VERSION)"
 
           // release the helm chart
