@@ -18,6 +18,7 @@ pipeline {
       steps {
         dir('/home/jenkins/go/src/github.com/cloudbees/athens') {
           checkout scm
+          sh "go get -u -v github.com/gobuffalo/buffalo/buffalo"
           sh "make build"
           sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
@@ -35,6 +36,7 @@ pipeline {
           // so we can retrieve the version in later steps
           sh "echo \$(jx-release-version) > VERSION"
           sh "jx step tag --version \$(cat VERSION)"
+          sh "go get -u -v github.com/gobuffalo/buffalo/buffalo"
           sh "make build"
           sh "export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml"
           sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
