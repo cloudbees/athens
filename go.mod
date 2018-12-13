@@ -1,4 +1,4 @@
-module github.com/gomods/athens
+module github.com/cloudbees/athens
 
 require (
 	cloud.google.com/go v0.26.0
